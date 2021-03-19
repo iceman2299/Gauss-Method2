@@ -107,6 +107,7 @@ int strway(double** a, double** b)
 	int k = min(col, row);
 	for (int j = 0; j < k; j++)
 	{
+		cout << j + 1 << "-й шаг:\n";
 		if (a[j][j] == 0)
 		{
 			if (j < row)
@@ -143,7 +144,7 @@ int strway(double** a, double** b)
 				}
 			}
 		}
-		cout << j + 1 << "-й шаг:\n";
+		
 		moutputS(a);
 	}
 	return 0;
@@ -199,12 +200,11 @@ int checkreal(double** a)
 			{
 				checkingsum = fabs(checkingsum) + fabs(a[i][j]);
 			}
-			if (checkingsum > 1)
+			if (checkingsum != 1)
 			{
 				return 2;
 			}
 		}
-
 	return 0;
 }
 
@@ -221,6 +221,7 @@ int checkanswer(double* x, double** b)
 		{
 			return 1;
 		}
+		cout << j+1 << " строка: " << bufsum << " = " << b[col][j] << endl;
 	}
 	return 0;
 }
@@ -280,7 +281,9 @@ int main()
 	}
 	}
 	bckway(x, a);
-	free(a);
+	for (int i = 0; i < col + 1; i++)
+		delete(a[i]);
+	delete(a);
 	kod = checkanswer(x, b);
 	switch (kod)
 	{
@@ -294,8 +297,10 @@ int main()
 	}
 	}
 	xoutputS(x);
-	free(b);
-	free(x);
+	for (int i = 0; i < col + 1; i++)
+		delete(b[i]);
+	delete(b);
+	delete(x);
 	cout << "\x1b[1;36mНажмите любую клавишу чтобы выйти...\x1b[1;0m";
 	cin.get();
 	return 0;
